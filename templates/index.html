@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+<head>
+    <title>Axial Length Plotter</title>
+</head>
+<body>
+    <h1>Axial Length Measurement Input</h1>
+    {% if error %}
+    <p style="color:red;">{{ error }}</p>
+    {% endif %}
+    <form method="post">
+        <label>Hospital ID:</label>
+        <input type="text" name="hospital_id" required><br><br>
+
+        <label>Date of Birth:</label>
+        <input type="date" name="dob" required><br><br>
+
+        <label>Sex:</label>
+        <select name="sex" required>
+            <option value="" disabled selected>Select sex</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+        </select><br><br>
+
+        <h3>Right Eye Measurements:</h3>
+        <div id="measurements_right">
+            <div class="measurement">
+                <label>Measurement Date:</label>
+                <input type="date" name="measurement_date_right" required>
+                <label>Axial Length (mm):</label>
+                <input type="number" step="0.01" name="axial_length_right" required>
+            </div>
+        </div>
+        <button type="button" onclick="addMeasurement('right')">Add Another Measurement</button><br><br>
+
+        <h3>Left Eye Measurements:</h3>
+        <div id="measurements_left">
+            <div class="measurement">
+                <label>Measurement Date:</label>
+                <input type="date" name="measurement_date_left" required>
+                <label>Axial Length (mm):</label>
+                <input type="number" step="0.01" name="axial_length_left" required>
+            </div>
+        </div>
+        <button type="button" onclick="addMeasurement('left')">Add Another Measurement</button><br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    <script>
+        function addMeasurement(eye) {
+            var div = document.createElement('div');
+            div.className = 'measurement';
+            div.innerHTML = '<label>Measurement Date:</label>' +
+                            '<input type="date" name="measurement_date_' + eye + '" required>' +
+                            '<label>Axial Length (mm):</label>' +
+                            '<input type="number" step="0.01" name="axial_length_' + eye + '" required>';
+            document.getElementById('measurements_' + eye).appendChild(div);
+        }
+    </script>
+</body>
+</html>
